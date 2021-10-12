@@ -1,0 +1,19 @@
+{
+  "cwd": "D:\\ANDRI\\DSwip\\Geelaboba",
+  "type": [
+    "pwa"
+  ],
+  "name": "Geelaboba",
+  "framework": "vue",
+  "template": "tabs",
+  "bundler": "vite",
+  "cssPreProcessor": "scss",
+  "theming": {
+    "customColor": true,
+    "color": "#2d964d",
+    "darkTheme": false,
+    "iconFonts": true,
+    "fillBars": false
+  },
+  "customBuild": false
+}
