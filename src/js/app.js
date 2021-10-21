@@ -13,6 +13,8 @@ import 'framework7/framework7-bundle.css';
 // Import Icons and App Custom Styles
 import '../css/icons.css';
 import '../css/app.scss';
+import axios from './axios-helper'
+
 
 // Import App Component
 import App from '../components/app.vue';
@@ -22,6 +24,9 @@ Framework7.use(Framework7Vue);
 
 // Init App
 const app = createApp(App);
+
+// Global Varable
+app.config.globalProperties.$axios = axios;
 
 // Register Framework7 Vue components
 registerComponents(app);
