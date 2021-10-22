@@ -4,6 +4,16 @@
   --f7-theme-color-rgb: 45, 150, 77;
   --f7-theme-color-shade: #24773d;
   --f7-theme-color-tint: #36b55d;
+  --f7-toolbar-bg-color:: #fff
+}
+/* Your app custom styles here */
+p{
+  margin: 0.5em 0;
+}
+.ios .searchbar input[type='search'], .ios .searchbar input[type='text']{
+  z-index: auto !important;
 }
 
-/* Your app custom styles here */
+.voucher-slide .swiper-slide{
+  width: 70%;
+}

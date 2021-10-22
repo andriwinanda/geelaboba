@@ -8,7 +8,7 @@
         :disable-button="false"
       ></f7-searchbar>
       <f7-nav-right>
-        <f7-link icon-f7="bell_fill"></f7-link>
+        <f7-link class="text-color-gray" icon-f7="bell_fill"></f7-link>
       </f7-nav-right>
     </f7-navbar>
 
@@ -18,117 +18,154 @@
         <img :src="slide.image" alt="" />
       </f7-swiper-slide>
     </f7-swiper>
-    <f7-swiper pagination :slidesPerView="3" :spaceBetween="20">
+    <f7-block-title class="no-margin-bottom margin-top"
+      >Voucher
+      <f7-link class="float-right text-color-gray"
+        ><small>lihat semua</small></f7-link
+      ></f7-block-title
+    >
+    <f7-swiper
+      class="voucher-slide"
+      data-pagination='{"el": ".swiper-pagination"}'
+      slidesPerView="auto"
+      data-centered-slides
+      :spaceBetween="0"
+    >
       <f7-swiper-slide>
-        <f7-card class="no-margin-horizontal">
+        <f7-card>
           <f7-card-content>
-            <p><strong class="text-color-primary">Diskon 15%</strong></p>
+            <f7-row class="align-items-center">
+              <f7-col width="70">
+                <strong class="text-color-primary">Diskon 15%</strong>
+                <br />
+                <small class="text-color-gray">
+                  Min. Order Rp 25.000, <br />
+                  Maks. Diskon Rp 20.000
+                </small>
+              </f7-col>
+              <f7-col width="30" class="text-align-center">
+                <f7-icon
+                  class="text-color-gray"
+                  size="35"
+                  f7="ticket"
+                ></f7-icon>
+              </f7-col>
+            </f7-row>
+          </f7-card-content>
+        </f7-card>
+      </f7-swiper-slide>
+      <f7-swiper-slide>
+        <f7-card>
+          <f7-card-content>
+            <f7-row class="align-items-center">
+              <f7-col width="70">
+                <strong class="text-color-primary">Diskon 15%</strong>
+                <br />
+                <small class="text-color-gray">
+                  Min. Order Rp 25.000, <br />
+                  Maks. Diskon Rp 20.000
+                </small>
+              </f7-col>
+              <f7-col width="30" class="text-align-center">
+                <f7-icon
+                  class="text-color-gray"
+                  size="35"
+                  f7="ticket"
+                ></f7-icon>
+              </f7-col>
+            </f7-row>
+          </f7-card-content>
+        </f7-card>
+      </f7-swiper-slide>
+      <f7-swiper-slide>
+        <f7-card>
+          <f7-card-content>
+            <f7-row class="align-items-center">
+              <f7-col width="70">
+                <strong class="text-color-primary">Diskon 15%</strong>
+                <br />
+                <small class="text-color-gray">
+                  Min. Order Rp 25.000, <br />
+                  Maks. Diskon Rp 20.000
+                </small>
+              </f7-col>
+              <f7-col width="30" class="text-align-center">
+                <f7-icon
+                  class="text-color-gray"
+                  size="35"
+                  f7="ticket"
+                ></f7-icon>
+              </f7-col>
+            </f7-row>
           </f7-card-content>
         </f7-card>
       </f7-swiper-slide>
     </f7-swiper>
-
+    <f7-block-title>Promo Hari Ini</f7-block-title>
     <f7-block>
-      <f7-swiper :slidesPerView="2" :spaceBetween="10">
-        <f7-swiper-slide>
-          <f7-card class="no-margin-horizontal">
-            <f7-card-content class="padding">
-              <f7-row>
-                <f7-col width="80">
-                  <p class="no-margin">
-                    <strong class="text-color-primary">Diskon 15%</strong>
-                    <br />
-                    <small>
-                      Min. Order Rp 25.000, <br> Maks. Diskon Rp 20.000
-                    </small>
-                  </p>
-                </f7-col>
-                <f7-col width="30">
-                  <f7-icon f7="ticket"></f7-icon>
-                </f7-col>
-              </f7-row>
-            </f7-card-content>
-          </f7-card>
-        </f7-swiper-slide>
-        <f7-swiper-slide>
-          <f7-card class="no-margin-horizontal">
-            <f7-card-content>
-              <p><strong class="text-color-primary">Diskon 15%</strong></p>
-            </f7-card-content>
-          </f7-card>
-        </f7-swiper-slide>
-        <f7-swiper-slide>
-          <f7-card class="no-margin-horizontal">
-            <f7-card-content>
-              <p><strong class="text-color-primary">Diskon 15%</strong></p>
-            </f7-card-content>
-          </f7-card>
-        </f7-swiper-slide>
-      </f7-swiper>
-    </f7-block>
-
-    <f7-block strong>
-      <p>
-        This is an example of tabs-layout application. The main point of such
-        tabbed layout is that each tab contains independent view with its own
-        routing and navigation.
-      </p>
-
-      <p>
-        Each tab/view may have different layout, different navbar type (dynamic,
-        fixed or static) or without navbar like this tab.
-      </p>
-    </f7-block>
-    <f7-block-title>Navigation</f7-block-title>
-    <f7-list>
-      <f7-list-item link="/about/" title="About"></f7-list-item>
-      <f7-list-item link="/form/" title="Form"></f7-list-item>
-    </f7-list>
-
-    <f7-block-title>Modals</f7-block-title>
-    <f7-block strong>
       <f7-row>
-        <f7-col width="50">
-          <f7-button fill raised popup-open="#my-popup">Popup</f7-button>
+        <f7-col width=50>
+          <product
+            title="Brown Sugar Boba Freshmilk"
+            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            :itemPrice="39999"
+            :itemDiscount="0.3"
+            :priceAfterDiscount="19999"
+          />
         </f7-col>
-        <f7-col width="50">
-          <f7-button fill raised login-screen-open="#my-login-screen"
-            >Login Screen</f7-button
-          >
+        <f7-col width=50>
+          <product
+            title="Brown Sugar Boba Freshmilk"
+            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            :itemPrice="39999"
+            :itemDiscount="0.3"
+            :priceAfterDiscount="19999"
+          />
+        </f7-col>
+        <f7-col width=50>
+          <product
+            title="Brown Sugar Boba Freshmilk"
+            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            :itemPrice="39999"
+            :itemDiscount="0.3"
+            :priceAfterDiscount="19999"
+          />
+        </f7-col>
+        <f7-col width=50>
+          <product
+            title="Brown Sugar Boba Freshmilk"
+            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            :itemPrice="39999"
+            :itemDiscount="0.3"
+            :priceAfterDiscount="19999"
+          />
+        </f7-col>
+        <f7-col width=50>
+          <product
+            title="Brown Sugar Boba Freshmilk"
+            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            :itemPrice="39999"
+            :itemDiscount="0.3"
+            :priceAfterDiscount="19999"
+          />
+        </f7-col>
+        <f7-col width=50>
+          <product
+            title="Brown Sugar Boba Freshmilk"
+            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            :itemPrice="39999"
+            :itemDiscount="0.3"
+            :priceAfterDiscount="19999"
+          />
         </f7-col>
       </f7-row>
     </f7-block>
-
-    <f7-block-title>Panels</f7-block-title>
-    <f7-block strong>
-      <f7-row>
-        <f7-col width="50">
-          <f7-button fill raised panel-open="left">Left Panel</f7-button>
-        </f7-col>
-        <f7-col width="50">
-          <f7-button fill raised panel-open="right">Right Panel</f7-button>
-        </f7-col>
-      </f7-row>
-    </f7-block>
-
-    <f7-list>
-      <f7-list-item
-        title="Dynamic (Component) Route"
-        link="/dynamic-route/blog/45/post/125/?foo=bar#about"
-      ></f7-list-item>
-      <f7-list-item
-        title="Default Route (404)"
-        link="/load-something-that-doesnt-exist/"
-      ></f7-list-item>
-      <f7-list-item
-        title="Request Data & Load"
-        link="/request-and-load/user/123456/"
-      ></f7-list-item>
-    </f7-list>
   </f7-page>
 </template>
 <script>
+import product from "../components/product.vue";
 export default {
+  components: { product },
   data() {
     return {
       slider: [],
