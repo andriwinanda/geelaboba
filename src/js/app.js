@@ -18,12 +18,14 @@ import axios from './axios-helper'
 
 // Import App Component
 import App from '../components/app.vue';
+import VueCountdown from '@chenfengyuan/vue-countdown';
 
 // Init Framework7-Vue Plugin
 Framework7.use(Framework7Vue);
 
 // Init App
 const app = createApp(App);
+app.component(VueCountdown.name, VueCountdown);
 
 // Global Varable
 app.config.globalProperties.$axios = axios;

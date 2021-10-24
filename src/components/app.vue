@@ -14,8 +14,11 @@
     <!-- Your main view/tab, should have "view-main" class. It also has "tab-active" class -->
     <f7-view id="view-home" main tab tab-active url="/"></f7-view>
 
-    <!-- Catalog View -->
-    <f7-view id="view-catalog" name="catalog" tab url="/catalog/"></f7-view>
+    <!-- Menu View -->
+    <f7-view id="view-menu" name="menu" tab url="/menu/"></f7-view>
+
+    <!-- Voucher View -->
+    <f7-view id="view-voucher" name="voucher" tab url="/voucher/"></f7-view>
 
     <!-- Settings View -->
     <f7-view id="view-login" name="login" tab url="/login/"></f7-view>

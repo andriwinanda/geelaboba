@@ -20,10 +20,10 @@
     </f7-swiper>
     <f7-block-title class="no-margin-bottom margin-top"
       >Voucher
-      <f7-link class="float-right text-color-gray"
-        ><small>lihat semua</small></f7-link
-      ></f7-block-title
-    >
+      <f7-link class="float-right text-color-gray">
+        <small>lihat semua</small>
+      </f7-link>
+    </f7-block-title>
     <f7-swiper
       class="voucher-slide"
       data-pagination='{"el": ".swiper-pagination"}'
@@ -102,9 +102,17 @@
       </f7-swiper-slide>
     </f7-swiper>
     <f7-block-title>Promo Hari Ini</f7-block-title>
+    <!-- <vue-countdown
+      :time="2 * 24 * 60 * 60 * 1000"
+      v-slot="{ days, hours, minutes, seconds }"
+    >
+      Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes,
+      {{ seconds }} seconds.
+    </vue-countdown> -->
+
     <f7-block>
       <f7-row>
-        <f7-col width=50>
+        <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
             image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
@@ -113,7 +121,7 @@
             :priceAfterDiscount="19999"
           />
         </f7-col>
-        <f7-col width=50>
+        <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
             image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
@@ -122,7 +130,7 @@
             :priceAfterDiscount="19999"
           />
         </f7-col>
-        <f7-col width=50>
+        <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
             image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
@@ -131,7 +139,7 @@
             :priceAfterDiscount="19999"
           />
         </f7-col>
-        <f7-col width=50>
+        <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
             image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
@@ -140,7 +148,7 @@
             :priceAfterDiscount="19999"
           />
         </f7-col>
-        <f7-col width=50>
+        <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
             image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
@@ -149,7 +157,7 @@
             :priceAfterDiscount="19999"
           />
         </f7-col>
-        <f7-col width=50>
+        <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
             image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
