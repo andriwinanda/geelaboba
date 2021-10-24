@@ -25,3 +25,16 @@
     </div>
   </f7-page>
 </template>
+<script>
+import { useStore } from "framework7-vue";
+import store from "../js/store";
+
+export default {
+  setup() {
+    const products = useStore("products");
+    return {
+      products
+    };
+  },
+};
+</script>
