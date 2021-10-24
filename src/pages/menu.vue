@@ -23,7 +23,7 @@
         <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
-            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
             :itemPrice="39999"
             :itemDiscount="0.3"
             :priceAfterDiscount="19999"
@@ -32,7 +32,7 @@
         <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
-            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
             :itemPrice="39999"
             :itemDiscount="0.3"
             :priceAfterDiscount="19999"
@@ -41,7 +41,7 @@
         <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
-            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
             :itemPrice="39999"
             :itemDiscount="0.3"
             :priceAfterDiscount="19999"
@@ -50,7 +50,7 @@
         <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
-            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
             :itemPrice="39999"
             :itemDiscount="0.3"
             :priceAfterDiscount="19999"
@@ -59,7 +59,7 @@
         <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
-            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
             :itemPrice="39999"
             :itemDiscount="0.3"
             :priceAfterDiscount="19999"
@@ -68,7 +68,7 @@
         <f7-col width="50">
           <product
             title="Brown Sugar Boba Freshmilk"
-            image="http://haus.co.id/img/images/home/menu/Boba%20Freshmilk%20Small.png"
+            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
             :itemPrice="39999"
             :itemDiscount="0.3"
             :priceAfterDiscount="19999"
