@@ -1,5 +1,11 @@
 <template>
-  <f7-page name="catalog">
+  <f7-page
+    name="catalog"
+    infinite
+    :infinite-distance="50"
+    :infinite-preloader="showPreloader"
+    @infinite="loadMoreProduct"
+    >
     <f7-navbar title="Menu"></f7-navbar>
     <f7-card>
       <f7-card-content>
@@ -20,58 +26,12 @@
 
     <f7-block>
       <f7-row>
-        <f7-col width="50">
+        <f7-col width="50" v-for="item in productList" :key="item.id">
           <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
-          />
-        </f7-col>
-        <f7-col width="50">
-          <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
-          />
-        </f7-col>
-        <f7-col width="50">
-          <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
-          />
-        </f7-col>
-        <f7-col width="50">
-          <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
-          />
-        </f7-col>
-        <f7-col width="50">
-          <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
-          />
-        </f7-col>
-        <f7-col width="50">
-          <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
+            :title="item.name"
+            :image="item.image"
+            :itemPrice="item.price"
+            :itemDiscount="item.discount || 0"
           />
         </f7-col>
       </f7-row>
@@ -79,27 +39,50 @@
   </f7-page>
 </template>
 <script>
-import { useStore } from "framework7-vue";
-import store from "../js/store";
+const limit = 10;
 import product from "../components/product.vue";
 export default {
   components: { product },
-  setup() {
-    const products = useStore("products");
-
-    const addProduct = () => {
-      store.dispatch("addProduct", {
-        id: "4",
-        title: "Apple iPhone 12",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis, error nesciunt vero, blanditiis pariatur dolor, minima sed sapiente rerum, dolorem corrupti hic modi praesentium unde saepe perspiciatis.",
-      });
-    };
-
+  data() {
     return {
-      products,
-      addProduct,
+      showPreloader: true,
+      productList: [],
+      productOffset: 0,
+      productRecord: 0,
     };
+  },
+  methods: {
+    loadProduct() {
+      let data = {
+        limit: limit,
+        offset: this.productOffset,
+      };
+      this.showPreloader = true;
+      this.$axios
+        .post(`product`, data)
+        .then((res) => {
+          this.showPreloader = false;
+          let productItem = res.data.content;
+          if (productItem.result) {
+            productItem.result.map((el) => {
+              this.productList.push(el);
+            });
+          } else this.productList = [];
+          this.productRecord = productItem.record;
+        })
+        .catch((err) => {
+          this.showPreloader = false;
+        });
+    },
+    loadMoreProduct() {
+      if (!this.showPreloader && this.productList.length < this.productRecord) {
+        this.productOffset += limit;
+        this.loadProduct();
+      }
+    },
+  },
+  created() {
+    this.loadProduct();
   },
 };
 </script>

@@ -13,7 +13,12 @@ p{
 .ios .searchbar input[type='search'], .ios .searchbar input[type='text']{
   z-index: auto !important;
 }
-
+.slider-image{
+  width: 100%;
+}
 .voucher-slide .swiper-slide{
   width: 70%;
+}
+.product-title{
+  text-transform: capitalize;
 }

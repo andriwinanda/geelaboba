@@ -76,5 +76,6 @@ var routes = [
     component: NotFoundPage,
   },
 ];
-
+routes.reloadCurrent = true
+routes.mode = 'history'
 export default routes;

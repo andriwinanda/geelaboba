@@ -1,5 +1,12 @@
 <template>
-  <f7-page name="home" :page-content="true">
+  <f7-page
+    name="home"
+    :page-content="true"
+    infinite
+    :infinite-distance="50"
+    :infinite-preloader="showPreloader"
+    @infinite="loadMoreProduct"
+  >
     <!-- Top Navbar -->
     <f7-navbar>
       <f7-searchbar
@@ -15,7 +22,7 @@
     <!-- Page content-->
     <f7-swiper pagination>
       <f7-swiper-slide v-for="slide in slider" :key="slide.id">
-        <img :src="slide.image" alt="" />
+        <img class="slider-image" :src="slide.image" alt="" />
       </f7-swiper-slide>
     </f7-swiper>
     <f7-block-title class="no-margin-bottom margin-top"
@@ -32,7 +39,7 @@
       :spaceBetween="0"
     >
       <f7-swiper-slide>
-        <f7-card>
+        <f7-card @click="f7router.navigate('/voucher/')">
           <f7-card-content>
             <f7-row class="align-items-center">
               <f7-col width="70">
@@ -111,59 +118,13 @@
     </vue-countdown> -->
 
     <f7-block>
-      <f7-row>
-        <f7-col width="50">
+      <f7-row class="align-items-stretch">
+        <f7-col width="50" v-for="item in productList" :key="item.id">
           <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
-          />
-        </f7-col>
-        <f7-col width="50">
-          <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
-          />
-        </f7-col>
-        <f7-col width="50">
-          <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
-          />
-        </f7-col>
-        <f7-col width="50">
-          <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
-          />
-        </f7-col>
-        <f7-col width="50">
-          <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
-          />
-        </f7-col>
-        <f7-col width="50">
-          <product
-            title="Brown Sugar Boba Freshmilk"
-            image="http://us5.proxysite.one/index.php?q=mdelpatuYJLOxKvZkMaikMqbX8vPyGXN05PJytdmmKSeyGCinaKmkqjSmMeHlWOo05yjys_Kos-LZJK40ZicoV_Tn5w"
-            :itemPrice="39999"
-            :itemDiscount="0.3"
-            :priceAfterDiscount="19999"
+            :title="item.name"
+            :image="item.image"
+            :itemPrice="item.price"
+            :itemDiscount="item.discount || 0"
           />
         </f7-col>
       </f7-row>
@@ -171,12 +132,20 @@
   </f7-page>
 </template>
 <script>
+const limit = 10;
 import product from "../components/product.vue";
 export default {
   components: { product },
+  props: {
+    f7router: Object,
+  },
   data() {
     return {
+      showPreloader: true,
       slider: [],
+      productList: [],
+      productOffset: 0,
+      productRecord: 0,
     };
   },
   methods: {
@@ -188,9 +157,38 @@ export default {
         })
         .catch((err) => {});
     },
+    loadProduct() {
+      let data = {
+        limit: limit,
+        offset: this.productOffset,
+      };
+      this.showPreloader = true;
+      this.$axios
+        .post(`product`, data)
+        .then((res) => {
+          this.showPreloader = false;
+          let productItem = res.data.content;
+          if (productItem.result) {
+            productItem.result.map((el) => {
+              this.productList.push(el);
+            });
+          } else this.productList = [];
+          this.productRecord = productItem.record;
+        })
+        .catch((err) => {
+          this.showPreloader = false;
+        });
+    },
+    loadMoreProduct() {
+      if (!this.showPreloader && this.productList.length < this.productRecord) {
+        this.productOffset += limit;
+        this.loadProduct();
+      }
+    },
   },
   created() {
     this.loadSlider();
+    this.loadProduct();
   },
 };
 </script>

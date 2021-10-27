@@ -1,5 +1,10 @@
 <template>
-  <f7-page name="product">
+  <f7-page name="product" 
+    infinite
+    :infinite-distance="50"
+    :infinite-preloader="showPreloader"
+    @infinite="loadMoreProduct"
+  >>
     <f7-navbar :title="product.title" back-link="Back"></f7-navbar>
     <f7-block-title>About {{product.title}}</f7-block-title>
     <f7-block strong>
@@ -8,24 +13,50 @@
   </f7-page>
 </template>
 <script>
-  import { useStore } from 'framework7-vue';
-
-  export default {
-    props: {
-      f7route: Object,
-    },
-    setup(props) {
-      const products = useStore('products');
-      const productId = props.f7route.params.id;
-      let currentProduct;
-      products.value.forEach(function (product) {
-        if (product.id === productId) {
-          currentProduct = product;
-        }
-      });
-      return {
-        product: currentProduct,
+const limit = 10;
+import product from "../components/product.vue";
+export default {
+  components: { product },
+  data() {
+    return {
+      showPreloader: true,
+      productList: [],
+      productOffset: 0,
+      productRecord: 0,
+    };
+  },
+  methods: {
+    loadProduct() {
+      let data = {
+        limit: limit,
+        offset: this.productOffset,
       };
+      this.showPreloader = true;
+      this.$axios
+        .post(`product`,data)
+        .then((res) => {
+          this.showPreloader = false;
+           let productItem = res.data.content;
+          if (productItem.result) {
+            productItem.result.map(el => {
+              this.productList.push(el);
+            });
+          } else this.productList = [];
+          this.productRecord = productItem.record;
+        })
+        .catch((err) => {
+          this.showPreloader = false;
+        });
     },
-  };
+    loadMoreProduct() {
+      if (!this.showPreloader && this.productList.length < this.productRecord) {
+        this.productOffset += limit;
+        this.loadProduct();
+      }
+    },
+  },
+  created() {
+    this.loadProduct();
+  },
+};
 </script>
