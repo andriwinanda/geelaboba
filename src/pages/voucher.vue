@@ -1,7 +1,8 @@
 <template>
-  <f7-page name="catalog">
-    <f7-navbar title="Voucher"></f7-navbar>
-    <div v-for="product in products" :key="product.id">
+<div>
+  <f7-page name="voucher">
+    <f7-navbar title="Voucher" back-link></f7-navbar>
+    <div v-for="i in 8" :key="i">
       <f7-card>
         <f7-card-content>
           <f7-row class="align-items-center">
@@ -24,6 +25,7 @@
       </f7-card>
     </div>
   </f7-page>
+</div>
 </template>
 <script>
 import { useStore } from "framework7-vue";

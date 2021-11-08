@@ -1,42 +1,44 @@
 <template>
-  <f7-page
-    name="catalog"
-    infinite
-    :infinite-distance="50"
-    :infinite-preloader="showPreloader"
-    @infinite="loadMoreProduct"
+  <div>
+    <f7-page
+      name="Menu"
+      infinite
+      :infinite-distance="50"
+      :infinite-preloader="showPreloader"
+      @infinite="loadMoreProduct"
     >
-    <f7-navbar title="Menu"></f7-navbar>
-    <f7-card>
-      <f7-card-content>
-        <p><strong>Lippo Mall Puri</strong></p>
-        <f7-row>
-          <f7-col width="80">
-            <small
-              >Lantai Lower Ground Floor , Jl. Puri Indah Boulevard Blok U No.
-              1, Puri Indah, Jakarta Barat
-            </small>
-          </f7-col>
-          <f7-col width="20" class="text-align-right"
-            ><f7-link>Ganti</f7-link></f7-col
-          >
-        </f7-row>
-      </f7-card-content>
-    </f7-card>
+      <f7-navbar title="Menu" :back-link="true"></f7-navbar>
+      <f7-card>
+        <f7-card-content>
+          <p><strong>Lippo Mall Puri</strong></p>
+          <f7-row>
+            <f7-col width="80">
+              <small
+                >Lantai Lower Ground Floor , Jl. Puri Indah Boulevard Blok U No.
+                1, Puri Indah, Jakarta Barat
+              </small>
+            </f7-col>
+            <f7-col width="20" class="text-align-right"
+              ><f7-link>Ganti</f7-link></f7-col
+            >
+          </f7-row>
+        </f7-card-content>
+      </f7-card>
 
-    <f7-block>
-      <f7-row>
-        <f7-col width="50" v-for="item in productList" :key="item.id">
-          <product
-            :title="item.name"
-            :image="item.image"
-            :itemPrice="item.price"
-            :itemDiscount="item.discount || 0"
-          />
-        </f7-col>
-      </f7-row>
-    </f7-block>
-  </f7-page>
+      <f7-block>
+        <f7-row>
+          <f7-col width="50" v-for="item in productList" :key="item.id">
+            <product
+              :title="item.name"
+              :image="item.image"
+              :itemPrice="item.price"
+              :itemDiscount="item.discount || 0"
+            />
+          </f7-col>
+        </f7-row>
+      </f7-block>
+    </f7-page>
+  </div>
 </template>
 <script>
 const limit = 10;

@@ -1,33 +1,35 @@
 <template>
   <f7-app v-bind="f7params" >
   <!-- Views/Tabs container -->
-  <f7-views tabs class="safe-areas">
+  <!-- <f7-views tabs class="safe-areas"> -->
     <!-- Tabbar for switching views-tabs -->
-    <f7-toolbar tabbar labels bottom>
+    <!-- <f7-toolbar tabbar labels bottom>
       <f7-link tab-link="#view-home" tab-link-active icon-size="24" icon-f7="house" text="Home"></f7-link>
       <f7-link tab-link="#view-menu" icon-size="24" icon-f7="square_list" text="Menu"></f7-link>
       <f7-link tab-link="#view-voucher" icon-size="24" icon-f7="ticket" text="Voucher"></f7-link>
       <f7-link tab-link="#view-profile" icon-size="24" icon-f7="person_fill" text="Profile"></f7-link>
      
-    </f7-toolbar>
+    </f7-toolbar> -->
 
     <!-- Your main view/tab, should have "view-main" class. It also has "tab-active" class -->
-    <f7-view id="view-home" main tab tab-active url="/"></f7-view>
+    <!-- <f7-view id="view-home" main tab tab-active url="/"></f7-view> -->
 
     <!-- Menu View -->
-    <f7-view id="view-menu" name="menu" tab url="/menu/"></f7-view>
+    <!-- <f7-view id="view-menu" name="menu" tab url="/menu/"></f7-view> -->
 
     <!-- Voucher View -->
-    <f7-view id="view-voucher" name="voucher" tab url="/voucher/"></f7-view>
+    <!-- <f7-view id="view-voucher" name="voucher" tab url="/voucher/"></f7-view> -->
 
     <!-- Settings View -->
-    <f7-view id="view-login" name="login" tab url="/login/"></f7-view>
+    <!-- <f7-view id="view-login" name="login" tab url="/login/"></f7-view> -->
 
     <!-- Settings View -->
     <!-- <f7-view id="view-settings" name="settings" tab url="/settings/"></f7-view> -->
 
 
-  </f7-views>
+  <!-- </f7-views> -->
+    <f7-view main class="safe-areas" :browser-history="true" :reloadCurrent="true" browser-history-separator></f7-view>
+
   </f7-app>
 </template>
 <script>

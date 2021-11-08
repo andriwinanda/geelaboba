@@ -2,6 +2,8 @@
 import HomePage from '../pages/home.vue';
 import Menu from '../pages/menu.vue';
 import Voucher from '../pages/voucher.vue';
+import Profile from '../pages/profile.vue';
+import Login from '../pages/login.vue';
 import FormPage from '../pages/form.vue';
 import ProductPage from '../pages/product.vue';
 import SettingsPage from '../pages/settings.vue';
@@ -14,14 +16,26 @@ var routes = [
   {
     path: '/',
     component: HomePage,
+    transition: 'f7-fade'
   },
   {
     path: '/menu/',
     component: Menu,
+    transition: 'f7-fade'
   },
   {
     path: '/voucher/',
     component: Voucher,
+    transition: 'f7-fade'
+  },
+  {
+    path: '/profile/',
+    component: Profile,
+    transition: 'f7-fade'
+  },
+  {
+    path: '/login/',
+    component: Login,
   },
 
   // {

@@ -5,13 +5,11 @@
   --f7-theme-color-shade: #24773d;
   --f7-theme-color-tint: #36b55d;
   --f7-toolbar-bg-color:: #fff
+  --f7-bars-translucent-opacity: none;
 }
 /* Your app custom styles here */
 p{
   margin: 0.5em 0;
-}
-.ios .searchbar input[type='search'], .ios .searchbar input[type='text']{
-  z-index: auto !important;
 }
 .slider-image{
   width: 100%;
@@ -21,4 +19,10 @@ p{
 }
 .product-title{
   text-transform: capitalize;
+}
+.ios-translucent-bars .toolbar{
+  background-color: #ffffff;
+}
+.toolbar{
+  background-color: #ffffff !important;
 }
