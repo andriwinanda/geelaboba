@@ -57,7 +57,7 @@
       </f7-swiper>
       <f7-block-title class="no-margin-bottom margin-top"
         >Voucher
-        <f7-link class="float-right text-color-gray">
+        <f7-link class="float-right text-color-gray" href="/voucher/">
           <small>lihat semua</small>
         </f7-link>
       </f7-block-title>
@@ -174,6 +174,7 @@ export default {
     return {
       showPreloader: true,
       slider: [],
+      voucher: [],
       productList: [],
       productOffset: 0,
       productRecord: 0,
@@ -185,6 +186,14 @@ export default {
         .get(`slider`)
         .then((res) => {
           this.slider = res.data.content.result;
+        })
+        .catch((err) => {});
+    },
+    loadVoucher() {
+      this.$axios
+        .get(`vdiscount`)
+        .then((res) => {
+          this.voucher = res.data.content.result;
         })
         .catch((err) => {});
     },
@@ -222,6 +231,7 @@ export default {
   created() {
     this.loadSlider();
     this.loadProduct();
+    this.loadVoucher()
   },
 };
 </script>

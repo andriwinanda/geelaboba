@@ -15,23 +15,19 @@ import NotFoundPage from '../pages/404.vue';
 var routes = [
   {
     path: '/',
-    component: HomePage,
-    transition: 'f7-fade'
+    component: HomePage
   },
   {
     path: '/menu/',
-    component: Menu,
-    transition: 'f7-fade'
+    component: Menu
   },
   {
     path: '/voucher/',
-    component: Voucher,
-    transition: 'f7-fade'
+    component: Voucher
   },
   {
     path: '/profile/',
-    component: Profile,
-    transition: 'f7-fade'
+    component: Profile
   },
   {
     path: '/login/',

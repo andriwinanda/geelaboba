@@ -101,9 +101,9 @@ const actions = {
   },
   login({ commit, state }, DATA_LOGIN) {
     commit(LOGIN) // show spinner
-    state.dataUser = DATA_LOGIN.dataUser
+    // state.dataUser = DATA_LOGIN.dataUser
     setToken(DATA_LOGIN.token)
-    setDataUser(JSON.stringify(DATA_LOGIN.dataUser))
+    // setDataUser(JSON.stringify(DATA_LOGIN.dataUser))
     commit(LOGIN_SUCCESS)
   },
   logout({ commit, state }) {

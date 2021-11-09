@@ -29,50 +29,69 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { useStore } from "framework7-vue";
+import store from "../js/store";
 import { f7 } from "framework7-vue";
 export default {
+  props: {
+    f7route: Object,
+    f7router: Object,
+  },
   data() {
     return {
       username: "",
       password: "",
     };
   },
+  setup() {
+    // const login = () => {
+    //   store.dispatch("addProduct", {
+    //     id: "4",
+    //     title: "Apple iPhone 12",
+    //     description:
+    //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis, error nesciunt vero, blanditiis pariatur dolor, minima sed sapiente rerum, dolorem corrupti hic modi praesentium unde saepe perspiciatis.",
+    //   });
+    // };
+    // return {
+    //   login,
+    // };
+  },
   methods: {
     login() {
       let userLogin = {
-        user: this.username,
-        pass: this.password,
+        username: this.username,
+        password: this.password,
+        device: "",
       };
       f7.dialog.preloader();
-      this.$axios.post("/customer/login", userLogin)
+      this.$axios
+        .post("/customer/login", userLogin)
         .then((res) => {
           f7.dialog.close();
-          let token = res.data.token;
-          let log = res.data.log;
-          this.$axios
-            .get("/customer/get", {
-              headers: {
-                "X-Auth-Token": token,
-              },
+          let token = res.data.content.token;
+          // this.$axios
+          //   .get("/customer/get", {
+          //     headers: {
+          //       "X-Auth-Token": token,
+          //     },
+          //   })
+          //   .then((res) => {
+          let dataLogin = {
+            token: token,
+            // dataUser: res.data.content,
+          };
+          f7.toast
+            .create({
+              text: "Login Success",
+              position: "bottom",
+              closeTimeout: 2000,
+              destroyOnClose: true,
             })
-            .then((res) => {
-              let dataLogin = {
-                token: token,
-                dataUser: res.data.content,
-              };
-              this.$store.dispatch("login", dataLogin);
-              f7.toast
-                .create({
-                  text: "Login Success",
-                  position: "bottom",
-                  closeTimeout: 2000,
-                  destroyOnClose: true,
-                })
-                .open();
-              f7router.navigate("/");
-              this.$axios.defaults.headers.common["X-Auth-Token"] = token;
-            });
+            .open();
+          this.$axios.defaults.headers.common["X-Auth-Token"] = token;
+          store.dispatch("login", dataLogin);
+          this.f7router.navigate("/");
+          // });
         })
         .catch((error) => {
           f7.dialog.close();
@@ -86,11 +105,6 @@ export default {
           }
         });
     },
-  },
-  computed: {
-    ...mapState({
-      isLoggedIn: (state) => state.login.isLoggedIn,
-    }),
   },
 };
 </script>

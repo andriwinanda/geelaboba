@@ -1,14 +1,14 @@
 import axios from 'axios'
 import { f7 } from "framework7-vue";
-
+import { getToken } from './localstorage-helper'
 
 
 let myAxios = axios.create();
 let url = "https://api.geelaboba.com/"
 
-// if (getToken()) {
-//   myAxios.defaults.headers.common["X-Auth-Token"] = getToken();
-// }
+if (getToken()) {
+  myAxios.defaults.headers.common["X-Auth-Token"] = getToken();
+}
 if (url) {
   myAxios.defaults.baseURL = url
 }
