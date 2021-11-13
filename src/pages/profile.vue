@@ -15,9 +15,25 @@
   </div>
 </template>
 <script>
-
 export default {
-  
+  data(){
+    return{
+      dataUser: {}
+    }
+  },
+  methods: {
+    loadUser() {
+      this.$axios
+        .post(`customer/get`)
+        .then((res) => {
+          this.dataUser = res.data.content.result;
+        })
+        .catch((err) => {});
+    },
+  },
+  mounted(){
+    this.loadUser()
+  }
 };
 </script>
 <style>

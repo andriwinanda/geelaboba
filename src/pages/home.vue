@@ -68,62 +68,15 @@
         data-centered-slides
         :spaceBetween="0"
       >
-        <f7-swiper-slide>
+        <f7-swiper-slide v-for="item in voucher" :key="item.id">
           <f7-card @click="f7router.navigate('/voucher/', { history: true })">
             <f7-card-content>
               <f7-row class="align-items-center">
                 <f7-col width="70">
-                  <strong class="text-color-primary">Diskon 15%</strong>
+                  <strong class="text-color-primary">Diskon {{item.percentage}}%</strong>
                   <br />
                   <small class="text-color-gray">
-                    Min. Order Rp 25.000, <br />
-                    Maks. Diskon Rp 20.000
-                  </small>
-                </f7-col>
-                <f7-col width="30" class="text-align-center">
-                  <f7-icon
-                    class="text-color-gray"
-                    size="35"
-                    f7="ticket"
-                  ></f7-icon>
-                </f7-col>
-              </f7-row>
-            </f7-card-content>
-          </f7-card>
-        </f7-swiper-slide>
-        <f7-swiper-slide>
-          <f7-card>
-            <f7-card-content>
-              <f7-row class="align-items-center">
-                <f7-col width="70">
-                  <strong class="text-color-primary">Diskon 15%</strong>
-                  <br />
-                  <small class="text-color-gray">
-                    Min. Order Rp 25.000, <br />
-                    Maks. Diskon Rp 20.000
-                  </small>
-                </f7-col>
-                <f7-col width="30" class="text-align-center">
-                  <f7-icon
-                    class="text-color-gray"
-                    size="35"
-                    f7="ticket"
-                  ></f7-icon>
-                </f7-col>
-              </f7-row>
-            </f7-card-content>
-          </f7-card>
-        </f7-swiper-slide>
-        <f7-swiper-slide>
-          <f7-card>
-            <f7-card-content>
-              <f7-row class="align-items-center">
-                <f7-col width="70">
-                  <strong class="text-color-primary">Diskon 15%</strong>
-                  <br />
-                  <small class="text-color-gray">
-                    Min. Order Rp 25.000, <br />
-                    Maks. Diskon Rp 20.000
+                    Min. Order Rp {{item.minimum}}
                   </small>
                 </f7-col>
                 <f7-col width="30" class="text-align-center">
@@ -191,7 +144,10 @@ export default {
     },
     loadVoucher() {
       this.$axios
-        .get(`vdiscount`)
+        .post(`vdiscount`, {
+          limit: "10",
+          publish: "1",
+        })
         .then((res) => {
           this.voucher = res.data.content.result;
         })
@@ -228,10 +184,10 @@ export default {
       }
     },
   },
-  created() {
+  mounted() {
     this.loadSlider();
     this.loadProduct();
-    this.loadVoucher()
+    this.loadVoucher();
   },
 };
 </script>
