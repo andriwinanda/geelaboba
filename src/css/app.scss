@@ -26,3 +26,20 @@ p{
 .toolbar{
   background-color: #ffffff !important;
 }
+.is-capitalized{
+  text-transform: capitalize;
+}
+.sheet-modal{
+  border-radius: 15px 15px 0 0;
+  &:after {
+    position: absolute;
+    content: "";
+    border-radius: 25px;
+    height: 4px;
+    background-color: #c4c4c4;
+    width: 70px;
+    margin: 0 auto;
+    margin: auto;
+    top: 15px; left: 0; right: 0;
+  }
+}

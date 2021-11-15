@@ -2,8 +2,10 @@
 import HomePage from '../pages/home.vue';
 import Menu from '../pages/menu.vue';
 import Voucher from '../pages/voucher.vue';
+import VoucherDetail from '../pages/VoucherDetail.vue';
 import Profile from '../pages/profile.vue';
 import Login from '../pages/login.vue';
+import Register from '../pages/register.vue';
 import FormPage from '../pages/form.vue';
 import ProductPage from '../pages/product.vue';
 import SettingsPage from '../pages/settings.vue';
@@ -26,12 +28,20 @@ var routes = [
     component: Voucher
   },
   {
+    path: '/voucher/:id',
+    component: VoucherDetail
+  },
+  {
     path: '/profile/',
     component: Profile
   },
   {
     path: '/login/',
     component: Login,
+  },
+  {
+    path: '/register/',
+    component: Register,
   },
 
   // {

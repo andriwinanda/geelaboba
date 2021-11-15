@@ -73,10 +73,12 @@
             <f7-card-content>
               <f7-row class="align-items-center">
                 <f7-col width="70">
-                  <strong class="text-color-primary">Diskon {{item.percentage}}%</strong>
+                  <strong class="text-color-primary"
+                    >Diskon {{ item.percentage }}%</strong
+                  >
                   <br />
                   <small class="text-color-gray">
-                    Min. Order Rp {{item.minimum}}
+                    Min. Order Rp {{ item.minimum }}
                   </small>
                 </f7-col>
                 <f7-col width="30" class="text-align-center">
@@ -104,6 +106,7 @@
         <f7-row class="align-items-stretch">
           <f7-col width="50" v-for="item in productList" :key="item.id">
             <product
+              @click="loadProductDetail(item.id)"
               :title="item.name"
               :image="item.image"
               :itemPrice="item.price"
@@ -112,14 +115,21 @@
           </f7-col>
         </f7-row>
       </f7-block>
+
+      <!-- PRODUCT DETAIL -->
+      <product-sheet :isOpened="isProductOpened" :product="productDetail">
+      </product-sheet>
     </f7-page>
   </div>
 </template>
 <script>
 const limit = 10;
 import product from "../components/product.vue";
+import productSheet from "../components/productSheet.vue";
+import { f7 } from "framework7-vue";
+
 export default {
-  components: { product },
+  components: { product, productSheet },
   props: {
     f7router: Object,
   },
@@ -131,6 +141,8 @@ export default {
       productList: [],
       productOffset: 0,
       productRecord: 0,
+      isProductOpened: false,
+      productDetail: {},
     };
   },
   methods: {
@@ -182,6 +194,20 @@ export default {
         this.productOffset += limit;
         this.loadProduct();
       }
+    },
+    loadProductDetail(id) {
+      f7.preloader.show();
+      this.$axios
+        .get(`product/get/${id}`)
+        .then((res) => {
+          f7.preloader.hide();
+
+          this.productDetail = res.data.content;
+          this.isProductOpened = true;
+        })
+        .catch((err) => {
+          f7.preloader.hide();
+        });
     },
   },
   mounted() {

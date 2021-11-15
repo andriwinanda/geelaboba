@@ -6,7 +6,7 @@
         <b class="product-title">{{ title }}</b>
       </p>
       <p>
-        Rp {{ fomatNumeric(itemPrice - itemPrice * itemDiscount) }}
+        Rp {{ fomatNumeric(itemPrice - itemPrice * (itemDiscount || 0)) }}
       </p>
       <p class="no-margin-vertical" v-if="itemDiscount">
         <del>Rp {{ fomatNumeric(itemPrice) }}</del> •

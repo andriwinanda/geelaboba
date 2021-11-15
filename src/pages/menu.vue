@@ -8,7 +8,7 @@
       @infinite="loadMoreProduct"
     >
       <f7-navbar title="Menu" :back-link="true"></f7-navbar>
-      <f7-card>
+      <!-- <f7-card>
         <f7-card-content>
           <p><strong>Lippo Mall Puri</strong></p>
           <f7-row>
@@ -23,12 +23,13 @@
             >
           </f7-row>
         </f7-card-content>
-      </f7-card>
+      </f7-card> -->
 
       <f7-block>
         <f7-row>
           <f7-col width="50" v-for="item in productList" :key="item.id">
             <product
+              @click="loadProductDetail(item.id)"
               :title="item.name"
               :image="item.image"
               :itemPrice="item.price"
@@ -37,20 +38,32 @@
           </f7-col>
         </f7-row>
       </f7-block>
+
+      <!-- PRODUCT DETAL -->
+      <product-sheet :isOpened="isProductOpened" :product="productDetail">
+      </product-sheet>
     </f7-page>
   </div>
 </template>
 <script>
 const limit = 10;
 import product from "../components/product.vue";
+import productSheet from "../components/productSheet.vue";
+import { f7 } from "framework7-vue";
+
 export default {
-  components: { product },
+  props: {
+    f7router: Object,
+  },
+  components: { product, productSheet },
   data() {
     return {
       showPreloader: true,
       productList: [],
       productOffset: 0,
       productRecord: 0,
+      isProductOpened: false,
+      productDetail: {},
     };
   },
   methods: {
@@ -81,6 +94,24 @@ export default {
         this.productOffset += limit;
         this.loadProduct();
       }
+    },
+    loadProductDetail(id) {
+      f7.preloader.show();
+      this.$axios
+        .get(`product/get/${id}`)
+        .then((res) => {
+          f7.preloader.hide();
+
+          this.productDetail = res.data.content;
+          this.isProductOpened = true;
+        })
+        .catch((err) => {
+          f7.preloader.hide();
+        });
+    },
+    closeProduct() {
+      this.productDetail = {};
+      this.isProductOpened = false;
     },
   },
   created() {

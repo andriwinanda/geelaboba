@@ -1,29 +1,45 @@
 <template>
   <div>
     <f7-page login-screen>
-      <f7-login-screen-title> Login </f7-login-screen-title>
+      <f7-login-screen-title> Register </f7-login-screen-title>
       <f7-list form>
         <f7-list-input
           type="text"
           name="username"
           placeholder="Username"
           :autofocus="true"
-          :value="username"
-          @input="username = $event.target.value"
+          :value="tname"
+          @input="tname = $event.target.value"
+        ></f7-list-input>
+        <f7-list-input
+          type="email"
+          name="Email"
+          placeholder="Email"
+          :autofocus="true"
+          :value="temail"
+          @input="temail = $event.target.value"
+        ></f7-list-input>
+        <f7-list-input
+          type="number"
+          name="Phone Number"
+          placeholder="Phone Number"
+          :autofocus="true"
+          :value="tphone1"
+          @input="tphone1 = $event.target.value"
         ></f7-list-input>
         <f7-list-input
           type="password"
           name="password"
           placeholder="Password"
-          :value="password"
+          :value="tpassword"
           @keypress.enter.prevent="login()"
-          @input="password = $event.target.value"
+          @input="tpassword = $event.target.value"
         ></f7-list-input>
       </f7-list>
       <f7-block>
-        <f7-button large fill color="primary" @click.prevent="login()"
-          >Login</f7-button
-        >
+        <f7-button large fill color="primary" @click.prevent="login()">
+          Login
+        </f7-button>
       </f7-block>
     </f7-page>
   </div>
@@ -39,8 +55,10 @@ export default {
   },
   data() {
     return {
-      username: "",
-      password: "",
+      tname: "",
+      tmail: "",
+      tphone1: "08",
+      tpassword: "",
     };
   },
   setup() {
@@ -58,27 +76,28 @@ export default {
   },
   methods: {
     login() {
-      let userLogin = {
-        username: this.username,
-        password: this.password,
-        device: "",
+      let userData = {
+        tname: this.tname,
+        tmail: this.tmail,
+        tphone1: this.tphone1,
+        tpassword: this.tpassword,
       };
       f7.dialog.preloader();
       this.$axios
-        .post("/customer/login", userLogin)
+        .post("/customer/add", userData)
         .then((res) => {
           f7.dialog.close();
           let token = res.data.content.token;
-          this.$axios
-            .get("/customer/get", {
-              headers: {
-                "X-Auth-Token": token,
-              },
-            })
-            .then((res) => {
+          // this.$axios
+          //   .get("/customer/get", {
+          //     headers: {
+          //       "X-Auth-Token": token,
+          //     },
+          //   })
+          //   .then((res) => {
           let dataLogin = {
             token: token,
-            dataUser: res.data.content,
+            // dataUser: res.data.content,
           };
           f7.toast
             .create({
@@ -91,29 +110,17 @@ export default {
           this.$axios.defaults.headers.common["X-Auth-Token"] = token;
           store.dispatch("login", dataLogin);
           this.f7router.navigate("/");
-          });
+          // });
         })
         .catch((error) => {
           f7.dialog.close();
           if (!error.response || error.response.status === 500) {
-            f7.toast
-            .create({
-              text: "Please check your network connection!",
-              position: "bottom",
-              closeTimeout: 2000,
-              destroyOnClose: true,
-            })
-            .open();
-          } else {
-            f7.toast
-            .create({
-              text: error.response.data.error,
-              position: "bottom",
-              closeTimeout: 2000,
-              destroyOnClose: true,
-            })
-            .open();
-            
+            f7.dialog.alert(
+              "Please check your network connection!",
+              "Connection Lost!"
+            );
+          } else if (error.response.status === 404) {
+            f7.dialog.alert("Username/password incorrect", "Incorrect");
           }
         });
     },

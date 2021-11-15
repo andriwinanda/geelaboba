@@ -11,8 +11,8 @@ const store = createStore({
   dataUser: getDataUser() || null,
   },
   getters: {
-    products({ state }) {
-      return state.products;
+    user({ state }) {
+      return state.dataUser;
     }
   },
   actions: {
@@ -20,7 +20,7 @@ const store = createStore({
       state.dataUser = DATA_LOGIN.dataUser
       state.isLoggedIn = true
       setToken(DATA_LOGIN.token)
-      // setDataUser(JSON.stringify(DATA_LOGIN.dataUser))
+      setDataUser(JSON.stringify(DATA_LOGIN.dataUser))
     },
     logout({ commit, state }) {
       state.dataUser = null

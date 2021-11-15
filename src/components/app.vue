@@ -46,7 +46,7 @@
       // Framework7 Parameters
       const f7params = {
         name: 'Geelaboba', // App name
-        theme: 'ios', // Automatic theme detection
+        theme: 'md', // Automatic theme detection
 
 
 

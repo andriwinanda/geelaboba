@@ -3,7 +3,7 @@
     <f7-page name="voucher">
       <f7-navbar title="Voucher" back-link></f7-navbar>
       <div  v-for="item in voucher" :key="item.id">
-        <f7-card @click="detailVoucher(item.id)">
+        <f7-card>
           <f7-card-content>
             <f7-row class="align-items-center">
               <f7-col width="20">
@@ -21,7 +21,7 @@
                 </small>
               </f7-col>
               <f7-col width="20" class="text-align-center">
-                <f7-link>Redeem</f7-link>
+                <f7-link>Klaim</f7-link>
               </f7-col>
             </f7-row>
           </f7-card-content>
@@ -32,9 +32,6 @@
 </template>
 <script>
 export default {
-  props: {
-    f7router: Object,
-  },
   data() {
     return {
       voucher: [],
@@ -52,9 +49,6 @@ export default {
         })
         .catch((err) => {});
     },
-    detailVoucher(id){
-     this.f7router.navigate(`/voucher/${id}`)
-    }
   },
   mounted() {
     this.loadVoucher();
