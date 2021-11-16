@@ -5,7 +5,7 @@ import Voucher from '../pages/voucher.vue';
 import VoucherDetail from '../pages/voucherDetail.vue';
 import Profile from '../pages/profile.vue';
 import Login from '../pages/login.vue';
-import Register from '../pages/register.vue';
+import Signup from '../pages/signup.vue';
 import FormPage from '../pages/form.vue';
 import ProductPage from '../pages/product.vue';
 import SettingsPage from '../pages/settings.vue';
@@ -40,8 +40,8 @@ var routes = [
     component: Login,
   },
   {
-    path: '/register/',
-    component: Register,
+    path: '/signup/',
+    component: Signup,
   },
 
   // {

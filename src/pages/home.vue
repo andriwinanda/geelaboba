@@ -50,57 +50,63 @@
         ></f7-link>
       </f7-toolbar>
       <!-- Page content-->
-      <f7-swiper pagination>
+      <f7-swiper pagination :speed="500">
         <f7-swiper-slide v-for="slide in slider" :key="slide.id">
           <img class="slider-image" :src="slide.image" alt="" />
         </f7-swiper-slide>
       </f7-swiper>
-      <f7-block-title class="no-margin-bottom margin-top"
-        >Voucher
-        <f7-link class="float-right text-color-gray" href="/voucher/">
-          <small>lihat semua</small>
-        </f7-link>
+      <template v-if="voucher">
+        <f7-block-title class="no-margin-bottom margin-top"
+          >Voucher
+          <f7-link class="float-right text-color-gray" href="/voucher/">
+            <small>lihat semua</small>
+          </f7-link>
+        </f7-block-title>
+        <f7-swiper
+          class="voucher-slide"
+          data-pagination='{"el": ".swiper-pagination"}'
+          slidesPerView="auto"
+          data-centered-slides
+          :spaceBetween="0"
+        >
+          <f7-swiper-slide v-for="item in voucher" :key="item.id">
+            <f7-card @click="f7router.navigate('/voucher/', { history: true })">
+              <f7-card-content>
+                <f7-row class="align-items-center">
+                  <f7-col width="70">
+                    <strong class="text-color-primary"
+                      >Diskon {{ item.percentage }}%</strong
+                    >
+                    <br />
+                    <small class="text-color-gray">
+                      Min. Order Rp {{ item.minimum }}
+                    </small>
+                  </f7-col>
+                  <f7-col width="30" class="text-align-center">
+                    <f7-icon
+                      class="text-color-gray"
+                      size="35"
+                      f7="ticket"
+                    ></f7-icon>
+                  </f7-col>
+                </f7-row>
+              </f7-card-content>
+            </f7-card>
+          </f7-swiper-slide>
+        </f7-swiper>
+      </template>
+
+      <f7-block-title class="align-items-center display-flex">
+        <p class="padding-right">Promo Hari Ini</p>
+
+        <Timer
+          v-if="timer"
+          :seconds="timer.seconds"
+          :minutes="timer.minutes"
+          :hours="timer.hours"
+          :days="timer.days"
+        />
       </f7-block-title>
-      <f7-swiper
-        class="voucher-slide"
-        data-pagination='{"el": ".swiper-pagination"}'
-        slidesPerView="auto"
-        data-centered-slides
-        :spaceBetween="0"
-      >
-        <f7-swiper-slide v-for="item in voucher" :key="item.id">
-          <f7-card @click="f7router.navigate('/voucher/', { history: true })">
-            <f7-card-content>
-              <f7-row class="align-items-center">
-                <f7-col width="70">
-                  <strong class="text-color-primary"
-                    >Diskon {{ item.percentage }}%</strong
-                  >
-                  <br />
-                  <small class="text-color-gray">
-                    Min. Order Rp {{ item.minimum }}
-                  </small>
-                </f7-col>
-                <f7-col width="30" class="text-align-center">
-                  <f7-icon
-                    class="text-color-gray"
-                    size="35"
-                    f7="ticket"
-                  ></f7-icon>
-                </f7-col>
-              </f7-row>
-            </f7-card-content>
-          </f7-card>
-        </f7-swiper-slide>
-      </f7-swiper>
-      <f7-block-title>Promo Hari Ini</f7-block-title>
-      <!-- <vue-countdown
-      :time="2 * 24 * 60 * 60 * 1000"
-      v-slot="{ days, hours, minutes, seconds }"
-    >
-      Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes,
-      {{ seconds }} seconds.
-    </vue-countdown> -->
 
       <f7-block>
         <f7-row class="align-items-stretch">
@@ -126,10 +132,13 @@
 const limit = 10;
 import product from "../components/product.vue";
 import productSheet from "../components/productSheet.vue";
+import Timer from "../components/timer.vue";
+import Digit from "../components/digit.vue";
 import { f7 } from "framework7-vue";
-
+import VueCountdown from "@chenfengyuan/vue-countdown";
+import { useTimer } from "vue-timer-hook";
 export default {
-  components: { product, productSheet },
+  components: { product, productSheet, Timer, Digit },
   props: {
     f7router: Object,
   },
@@ -143,6 +152,7 @@ export default {
       productRecord: 0,
       isProductOpened: false,
       productDetail: {},
+      timer: null,
     };
   },
   methods: {
@@ -214,6 +224,9 @@ export default {
     this.loadSlider();
     this.loadProduct();
     this.loadVoucher();
+    var time = new Date();
+    time.setSeconds(time.getSeconds() + 600); // 10 minutes timer
+    this.timer = useTimer(time);
   },
 };
 </script>

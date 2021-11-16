@@ -1,48 +1,50 @@
 <template>
-  <div>
-    <f7-page login-screen>
-      <f7-login-screen-title> Register </f7-login-screen-title>
-      <f7-list form>
-        <f7-list-input
-          type="text"
-          name="username"
-          placeholder="Username"
-          :autofocus="true"
-          :value="tname"
-          @input="tname = $event.target.value"
-        ></f7-list-input>
-        <f7-list-input
-          type="email"
-          name="Email"
-          placeholder="Email"
-          :autofocus="true"
-          :value="temail"
-          @input="temail = $event.target.value"
-        ></f7-list-input>
-        <f7-list-input
-          type="number"
-          name="Phone Number"
-          placeholder="Phone Number"
-          :autofocus="true"
-          :value="tphone1"
-          @input="tphone1 = $event.target.value"
-        ></f7-list-input>
-        <f7-list-input
-          type="password"
-          name="password"
-          placeholder="Password"
-          :value="tpassword"
-          @keypress.enter.prevent="login()"
-          @input="tpassword = $event.target.value"
-        ></f7-list-input>
-      </f7-list>
-      <f7-block>
-        <f7-button large fill color="primary" @click.prevent="login()">
-          Login
-        </f7-button>
-      </f7-block>
-    </f7-page>
-  </div>
+  <f7-page name="signup" login-screen :page-content="true">
+    <f7-login-screen-title> Sign Up </f7-login-screen-title>
+    <f7-list form>
+      <f7-list-input
+        type="text"
+        name="Name"
+        placeholder="Name"
+        :autofocus="true"
+        :value="tname"
+        @input="tname = $event.target.value"
+      ></f7-list-input>
+      <f7-list-input
+        type="email"
+        name="Email"
+        placeholder="Email"
+        :autofocus="true"
+        :value="temail"
+        @input="temail = $event.target.value"
+      ></f7-list-input>
+      <f7-list-input
+        type="number"
+        name="Phone Number"
+        placeholder="Phone Number"
+        :autofocus="true"
+        :value="tphone1"
+        @input="tphone1 = $event.target.value"
+      ></f7-list-input>
+      <f7-list-input
+        type="password"
+        name="password"
+        placeholder="Password"
+        :value="tpassword"
+        @keypress.enter.prevent="login()"
+        @input="tpassword = $event.target.value"
+      ></f7-list-input>
+    </f7-list>
+    <f7-block>
+      <f7-button large fill color="primary" @click.prevent="login()">
+        Sign Up
+      </f7-button>
+    </f7-block>
+    <f7-block-footer class="margin-top">
+      Already have an account ?
+      <f7-link href="/login/">Login</f7-link>
+    </f7-block-footer>
+  </f7-page>
 </template>
 <script>
 import { useStore } from "framework7-vue";
@@ -56,7 +58,7 @@ export default {
   data() {
     return {
       tname: "",
-      tmail: "",
+      temail: "",
       tphone1: "08",
       tpassword: "",
     };
@@ -78,7 +80,7 @@ export default {
     login() {
       let userData = {
         tname: this.tname,
-        tmail: this.tmail,
+        temail: this.temail,
         tphone1: this.tphone1,
         tpassword: this.tpassword,
       };

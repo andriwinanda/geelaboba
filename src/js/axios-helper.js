@@ -21,6 +21,16 @@ myAxios.interceptors.response.use(function (response) {
     if (!error.response || error.response.status === 500) {
       console.log("Connection Lost!", "Please check your network connection!");
     }
+    else{
+      f7.toast
+      .create({
+        text: error.response.data.error,
+        position: "bottom",
+        closeTimeout: 2000,
+        destroyOnClose: true,
+      })
+      .open();
+    }
   }
   return Promise.reject(error)
 })
