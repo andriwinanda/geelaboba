@@ -39,7 +39,7 @@
           </f7-card-content>
         </f7-card>
         <f7-list class="no-hairlines">
-          <f7-list-item title="Notifkasi" link="#">
+          <f7-list-item title="Notification" link="#">
             <template #media>
               <f7-icon class="text-color-gray" f7="bell_fill"></f7-icon>
             </template>

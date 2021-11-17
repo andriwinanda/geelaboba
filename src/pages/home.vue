@@ -16,7 +16,7 @@
           :disable-button="false"
         ></f7-searchbar>
         <f7-nav-right>
-          <f7-link class="text-color-gray" icon-f7="bell_fill"></f7-link>
+          <f7-link class="text-color-gray" href="/notification/" icon-f7="bell_fill"></f7-link>
         </f7-nav-right>
       </f7-navbar>
       <f7-toolbar tabbar labels bottom>

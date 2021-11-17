@@ -6,6 +6,7 @@ import VoucherDetail from '../pages/voucherDetail.vue';
 import Profile from '../pages/profile.vue';
 import Login from '../pages/login.vue';
 import Signup from '../pages/signup.vue';
+import Notification from '../pages/notification.vue';
 import FormPage from '../pages/form.vue';
 import ProductPage from '../pages/product.vue';
 import SettingsPage from '../pages/settings.vue';
@@ -42,6 +43,10 @@ var routes = [
   {
     path: '/signup/',
     component: Signup,
+  },
+  {
+    path: '/notification/',
+    component: Notification,
   },
 
   // {
