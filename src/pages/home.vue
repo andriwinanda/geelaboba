@@ -9,12 +9,7 @@
       @infinite="loadMoreProduct"
     >
       <!-- Top Navbar -->
-      <f7-navbar>
-        <f7-searchbar
-          search-container=".search-list"
-          search-in=".item-title"
-          :disable-button="false"
-        ></f7-searchbar>
+      <f7-navbar title="geela boba">
         <f7-nav-right>
           <f7-link class="text-color-gray" href="/notification/" icon-f7="bell_fill"></f7-link>
         </f7-nav-right>

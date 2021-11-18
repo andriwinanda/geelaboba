@@ -39,12 +39,12 @@
           </f7-card-content>
         </f7-card>
         <f7-list class="no-hairlines">
-          <f7-list-item title="Notification" link="#">
+          <f7-list-item title="Notification" link="/notification/">
             <template #media>
               <f7-icon class="text-color-gray" f7="bell_fill"></f7-icon>
             </template>
           </f7-list-item>
-          <f7-list-item title="Live Chat" link="#">
+          <f7-list-item title="Live Chat" link="wa.me">
             <template #media>
               <f7-icon
                 class="text-color-gray"
@@ -52,7 +52,7 @@
               ></f7-icon>
             </template>
           </f7-list-item>
-          <f7-list-item title="About Us" link="#">
+          <f7-list-item title="About Us" link="#" popup-open=".about-us">
             <template #media>
               <f7-icon class="text-color-gray" f7="info_circle_fill"></f7-icon>
             </template>
@@ -65,6 +65,7 @@
         <!-- Update Profile -->
         <f7-popup
           class="demo-popup"
+          tablet-fullscreen
           :opened="popupOpened"
           @popup:closed="popupOpened = false"
         >
@@ -125,6 +126,33 @@
             </f7-list>
           </f7-page>
         </f7-popup>
+
+        <!-- Popup -->
+      <f7-popup
+        class="about-us"
+        tablet-fullscreen
+      >
+        <f7-page>
+          <f7-navbar title="About Us" no-hairline no-shadow>
+            <f7-nav-right>
+              <f7-link popup-close icon-f7="multiply" />
+            </f7-nav-right>
+          </f7-navbar>
+          <f7-toolbar position="bottom">
+            <f7-block style="width: 100%" padding>
+              <f7-button fill popup-close> Close </f7-button>
+            </f7-block>
+          </f7-toolbar>
+          <f7-block>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque
+              optio architecto repudiandae quam quo sint, harum, odit
+              consequuntur dignissimos voluptates maiores? Officia rem animi
+              maiores! Doloremque facilis voluptatem totam ullam!
+            </p>
+          </f7-block>
+        </f7-page>
+      </f7-popup>
       </template>
     </f7-page>
   </div>
@@ -142,6 +170,7 @@ export default {
     return {
       dataUser: {},
       popupOpened: false,
+      aboutUs: false,
       showPreloader: false,
       update: {
         tname: "",

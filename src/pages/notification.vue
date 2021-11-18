@@ -2,27 +2,44 @@
   <div>
     <f7-page name="voucher">
       <f7-navbar title="Notification" back-link></f7-navbar>
-      
-        <f7-card>
-          <f7-card-content>
-            <f7-row class="align-items-center">
-              <f7-col width="20">
-                <f7-icon
-                  class="text-color-gray"
-                  size="35"
-                  f7="ticket"
-                ></f7-icon>
-              </f7-col>
-              <f7-col width="80">
-                <strong class="text-color-primary">Dapatkan Promo Terbaik</strong>
-                <br />
-                <small class="text-color-gray">
-                  Min. Order Rp
-                </small>
-              </f7-col>
-            </f7-row>
-          </f7-card-content>
-        </f7-card>
+
+      <f7-card @click="detailNotif()">
+        <f7-card-content>
+          <h3 class="no-margin">
+            <strong class="text-color-primary">Dapatkan Promo Terbaik </strong>
+          </h3>
+          <small class="text-color-gray"> 2 Hours ago</small>
+        </f7-card-content>
+      </f7-card>
+
+      <!-- Update Profile -->
+      <f7-popup
+        class="demo-popup"
+        tablet-fullscreen
+        :opened="popupOpened"
+        @popup:closed="popupOpened = false"
+      >
+        <f7-page>
+          <f7-navbar title="Detail Notification" no-hairline no-shadow>
+            <f7-nav-right>
+              <f7-link popup-close icon-f7="multiply" />
+            </f7-nav-right>
+          </f7-navbar>
+          <f7-toolbar position="bottom">
+            <f7-block style="width: 100%" padding>
+              <f7-button fill @click="popupOpened = false"> Close </f7-button>
+            </f7-block>
+          </f7-toolbar>
+          <f7-block>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque
+              optio architecto repudiandae quam quo sint, harum, odit
+              consequuntur dignissimos voluptates maiores? Officia rem animi
+              maiores! Doloremque facilis voluptatem totam ullam!
+            </p>
+          </f7-block>
+        </f7-page>
+      </f7-popup>
     </f7-page>
   </div>
 </template>
@@ -31,10 +48,11 @@ export default {
   data() {
     return {
       voucher: [],
+      popupOpened: false,
     };
   },
   methods: {
-    loadVoucher() {
+    loadNotif() {
       this.$axios
         .post(`vdiscount`, {
           limit: "10",
@@ -45,9 +63,12 @@ export default {
         })
         .catch((err) => {});
     },
+    detailNotif() {
+      this.popupOpened = true;
+    },
   },
   mounted() {
-    this.loadVoucher();
+    this.loadNotif();
   },
 };
 </script>
