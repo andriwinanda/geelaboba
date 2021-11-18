@@ -39,7 +39,7 @@
       <f7-link href="/signup/">Sign Up</f7-link>
     </f7-block-footer>
     <!-- RESET PASSWORD -->
-    <f7-popup id="resetPassword" @popup:close="resetForm">
+    <f7-popup id="resetPassword" @popup:close="resetForm" tablet-fullscreen>
       <f7-view>
         <f7-page class="bg-color-white">
           <f7-link icon-f7="multiply" class="float-right padding popup-close">
