@@ -9,13 +9,13 @@
             fill
             :loading="showPreloader"
             @click="useVoucher(f7route.params.id)"
-            >Di klik oleh kasir</f7-button
+            >Di klik oleh kasir </f7-button
           >
         </f7-block>
       </f7-toolbar>
       <f7-card class="bg-color-primary">
         <f7-card-content text-color="white">
-          <h2 class="no-margin">Diskon {{ voucher.percentage }}</h2>
+          <h2 class="no-margin">Diskon {{ voucher.percentage }} {{f7route.route.path}}</h2>
           <small> Minimal Order Rp {{ fomatNumeric(voucher.minimum) }}</small>
           <br />
           <small>Berlaku sampai dengan {{ voucher.period }}</small>

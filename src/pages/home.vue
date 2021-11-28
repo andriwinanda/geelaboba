@@ -3,47 +3,7 @@
     <f7-page
       name="home"
       :page-content="true"
-      infinite
-      :infinite-distance="50"
-      :infinite-preloader="showPreloader"
-      @infinite="loadMoreProduct"
     >
-      <!-- Top Navbar -->
-      <f7-navbar title="geela boba">
-        <f7-nav-right>
-          <f7-link class="text-color-gray" href="/notification/" icon-f7="bell_fill"></f7-link>
-        </f7-nav-right>
-      </f7-navbar>
-      <f7-toolbar tabbar labels bottom>
-        <f7-link
-          tab-link
-          tab-link-active
-          icon-size="24"
-          icon-f7="house"
-          text="Home"
-        ></f7-link>
-        <f7-link
-          tab-link
-          href="/menu/"
-          icon-size="24"
-          icon-f7="square_list"
-          text="Menu"
-        ></f7-link>
-        <f7-link
-          tab-link
-          href="/voucher/"
-          icon-size="24"
-          icon-f7="ticket"
-          text="Voucher"
-        ></f7-link>
-        <f7-link
-          tab-link
-          href="/profile/"
-          icon-size="24"
-          icon-f7="person_fill"
-          text="Profile"
-        ></f7-link>
-      </f7-toolbar>
       <!-- Page content-->
       <f7-swiper pagination :speed="500">
         <f7-swiper-slide v-for="slide in slider" :key="slide.id">
@@ -130,7 +90,6 @@ import productSheet from "../components/productSheet.vue";
 import Timer from "../components/timer.vue";
 import Digit from "../components/digit.vue";
 import { f7 } from "framework7-vue";
-import VueCountdown from "@chenfengyuan/vue-countdown";
 import { useTimer } from "vue-timer-hook";
 export default {
   components: { product, productSheet, Timer, Digit },
@@ -193,12 +152,6 @@ export default {
         .catch((err) => {
           this.showPreloader = false;
         });
-    },
-    loadMoreProduct() {
-      if (!this.showPreloader && this.productList.length < this.productRecord) {
-        this.productOffset += limit;
-        this.loadProduct();
-      }
     },
     loadProductDetail(id) {
       f7.preloader.show();

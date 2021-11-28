@@ -1,25 +1,42 @@
 <template>
   <div>
-    <f7-page
-      name="Menu"
-      infinite
-      :infinite-distance="50"
-      :infinite-preloader="showPreloader"
-      @infinite="loadMoreProduct"
-    >
-      <f7-navbar title="Menu" :back-link="true">
-        <f7-nav-right>
+    <f7-page name="Menu">
+      <f7-navbar>
+        <f7-nav-left>
+          <div class="display-flex padding align-items-center">
+            <f7-icon f7="placemark" color="gray"></f7-icon>
+            <div class="padding-left" @click="changeLocation()">
+              <p class="no-margin is-capitalized" style="font-size: 8pt">
+                {{ dropPointSelected.name }} &#8964;
+              </p>
+              <p
+                class="no-margin"
+                style="
+                  font-size: 10pt;
+                  width: 200px
+                  display: block;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+              >
+                {{ dropPointSelected.address }}
+              </p>
+            </div>
+          </div>
+        </f7-nav-left>
+        <f7-nav-right :inner="false">
           <f7-link
             class="searchbar-enable"
-            data-searchbar=".searchbar-demo"
+            data-searchbar=".searchbar-menu"
             icon-ios="f7:search"
             icon-aurora="f7:search"
             icon-md="material:search"
           ></f7-link>
         </f7-nav-right>
         <f7-searchbar
-          class="searchbar-demo"
-          expandable
+          :expandable="true"
+          class="searchbar-menu"
           @input="
             search = $event.target.value;
             searchProduct();
@@ -29,40 +46,64 @@
           search-in=".item-title"
         ></f7-searchbar>
       </f7-navbar>
-      <!-- <f7-card>
-        <f7-card-content>
-          <p><strong>Lippo Mall Puri</strong></p>
-          <f7-row>
-            <f7-col width="80">
-              <small
-                >Lantai Lower Ground Floor , Jl. Puri Indah Boulevard Blok U No.
-                1, Puri Indah, Jakarta Barat
-              </small>
-            </f7-col>
-            <f7-col width="20" class="text-align-right"
-              ><f7-link>Ganti</f7-link></f7-col
-            >
-          </f7-row>
-        </f7-card-content>
-      </f7-card> -->
-
-      <f7-block>
-        <f7-row>
-          <f7-col width="50" v-for="item in productList" :key="item.id">
-            <product
-              @click="loadProductDetail(item.id)"
-              :title="item.name"
-              :image="item.image"
-              :itemPrice="item.price"
-              :itemDiscount="item.discount || 0"
-            />
-          </f7-col>
-        </f7-row>
-      </f7-block>
+      <!-- Product -->
+      <div v-for="(category, i) in productList" :key="i">
+        <template v-if="category">
+          <f7-block-title class="is-capitalized">
+            {{ category[0].category }}
+          </f7-block-title>
+          <f7-block>
+            <f7-row>
+              <f7-col width="50" v-for="item in category" :key="item.id">
+                <product
+                  @click="loadProductDetail(item.id)"
+                  :title="item.name"
+                  :image="item.image"
+                  :itemPrice="item.price"
+                  :itemDiscount="item.discount || 0"
+                />
+              </f7-col>
+            </f7-row>
+          </f7-block>
+        </template>
+      </div>
 
       <!-- PRODUCT DETAL -->
       <product-sheet :isOpened="isProductOpened" :product="productDetail">
       </product-sheet>
+      <!-- Drop Point -->
+      <f7-sheet
+        swipe-to-close
+        :opened="changeLocationSheet"
+        @sheet:closed="changeLocationSheet = false"
+      >
+        <f7-toolbar>
+          <div class="left"></div>
+          <div class="right">
+            <f7-link sheet-close>Close</f7-link>
+          </div>
+        </f7-toolbar>
+        <!-- Scrollable sheet content -->
+        <f7-page-content>
+          <f7-list class="no-margin">
+            <f7-list-item
+              v-for="(item, i) in dropPoint"
+              :key="i"
+              link="#"
+              @click="selectLocation(item)"
+              :title="item.address"
+              after="Select"
+            >
+              <template #header>
+                <span class="is-capitalized">{{ item.name }}</span>
+              </template>
+              <template #media>
+                <f7-icon class="text-color-gray" f7="placemark"></f7-icon>
+              </template>
+            </f7-list-item>
+          </f7-list>
+        </f7-page-content>
+      </f7-sheet>
     </f7-page>
   </div>
 </template>
@@ -85,39 +126,45 @@ export default {
       productRecord: 0,
       isProductOpened: false,
       productDetail: {},
-      search: ''
+      search: "",
+      dropPoint: [],
+      dropPointSelected: {},
+      changeLocationSheet: false,
     };
   },
   methods: {
-    loadProduct() {
-      let data = {
-        limit: limit,
+    loadProduct(category, recommend) {
+      let dataReq = {
+        // limit: limit,
         offset: this.productOffset,
       };
       this.showPreloader = true;
-
+      if (category) {
+        dataReq.category = category;
+      }
+      if (recommend) dataReq.recommend = recommend;
       let ajax;
       if (this.search) {
-        data.filter = this.search;
-        ajax = this.$axios.post("/product/search", data);
+        dataReq.filter = this.search;
+        ajax = this.$axios.post("/product/search", dataReq);
       } else {
-        ajax = this.$axios.post("/product", data);
+        ajax = this.$axios.post("/product", dataReq);
       }
       ajax
         .then((res) => {
           let data = res.data.content;
-          if (data.result) {
+          if (data.record) {
+            this.productList[category] = [];
             data.result.map((el) => {
-              this.productList.push(el);
+              this.productList[category].push(el);
             });
-          } else this.productList = [];
+          }
           this.productRecord = data.record;
           this.showPreloader = false;
         })
         .catch((err) => {
           this.showPreloader = false;
         });
-
       // this.$axios
       //   .post(`product`, data)
       //   .then((res) => {
@@ -152,7 +199,6 @@ export default {
         .get(`product/get/${id}`)
         .then((res) => {
           f7.preloader.hide();
-
           this.productDetail = res.data.content;
           this.isProductOpened = true;
         })
@@ -160,13 +206,40 @@ export default {
           f7.preloader.hide();
         });
     },
+    loadCategory() {
+      this.$axios
+        .get(`category`)
+        .then((res) => {
+          res.data.content.result.map((el) => {
+            this.loadProduct(el.id, 0);
+          });
+        })
+        .catch((err) => {});
+    },
+    loadDropPoint() {
+      this.$axios
+        .get(`droppoint`)
+        .then((res) => {
+          this.dropPoint = res.data.content.result;
+          this.dropPointSelected = this.dropPoint[0];
+        })
+        .catch((err) => {});
+    },
+    changeLocation() {
+      this.changeLocationSheet = true;
+    },
+    selectLocation(item) {
+      this.dropPointSelected = item;
+      this.changeLocationSheet = false;
+    },
     closeProduct() {
       this.productDetail = {};
       this.isProductOpened = false;
     },
   },
   created() {
-    this.loadProduct();
+    this.loadCategory();
+    this.loadDropPoint();
   },
 };
 </script>

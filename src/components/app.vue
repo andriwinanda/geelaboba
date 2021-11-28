@@ -28,7 +28,19 @@
 
 
   <!-- </f7-views> -->
-    <f7-view main class="safe-areas" :browser-history="true" :reloadCurrent="true" browser-history-separator></f7-view>
+    <f7-view main class="safe-areas" :browser-history="true" :reloadCurrent="true" browser-history-separator>
+      <f7-toolbar tabbar labels bottom>
+        <f7-link v-for="(item, i) in menu" :key="i"
+          tab-link
+          tab-link-active
+          icon-size="24"
+          :icon-f7="item.icon"
+          :href="item.link"
+          :text="item.title"
+        ></f7-link>
+        
+      </f7-toolbar>
+    </f7-view>
 
   </f7-app>
 </template>
@@ -36,11 +48,14 @@
   import { ref, onMounted } from 'vue';
   import { f7, f7ready } from 'framework7-vue';
 
-
   import routes from '../js/routes.js';
   import store from '../js/store';
 
   export default {
+    props: {
+    f7route: Object,
+    f7router: Object,
+  },
     setup() {
 
       // Framework7 Parameters
@@ -59,28 +74,39 @@
           path: '/service-worker.js',
         } : {},
       };
-      // Login screen data
-      const username = ref('');
-      const password = ref('');
+      // Menu screen data
+      const menu = [
+        {
+          title: 'Home',
+          icon: 'house',
+          link: '/'
+        },
+        {
+          title: 'Menu',
+          icon: 'square_list',
+          link: '/menu/'
+        },
+        {
+          title: 'Voucher',
+          icon: 'ticket',
+          link: '/voucher/'
+        },
+        {
+          title: 'Profile',
+          icon: 'person_fill',
+          link: '/profile/'
+        },
+      ];
 
-      const alertLoginData = () => {
-        f7.dialog.alert('Username: ' + username.value + '<br>Password: ' + password.value, () => {
-          f7.loginScreen.close();
-        });
-      }
       onMounted(() => {
         f7ready(() => {
-
-
           // Call F7 APIs here
         });
       });
 
       return {
         f7params,
-        username,
-        password,
-        alertLoginData
+        menu
       }
     }
   }
