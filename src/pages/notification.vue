@@ -12,7 +12,7 @@
         </f7-card-content>
       </f7-card>
 
-      <!-- Update Profile -->
+      <!-- Popup -->
       <f7-popup
         class="demo-popup"
         tablet-fullscreen

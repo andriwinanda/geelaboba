@@ -29,17 +29,7 @@
 
   <!-- </f7-views> -->
     <f7-view main class="safe-areas" :browser-history="true" :reloadCurrent="true" browser-history-separator>
-      <f7-toolbar tabbar labels bottom>
-        <f7-link v-for="(item, i) in menu" :key="i"
-          tab-link
-          tab-link-active
-          icon-size="24"
-          :icon-f7="item.icon"
-          :href="item.link"
-          :text="item.title"
-        ></f7-link>
-        
-      </f7-toolbar>
+      <tabbar/>
     </f7-view>
 
   </f7-app>
@@ -47,11 +37,14 @@
 <script>
   import { ref, onMounted } from 'vue';
   import { f7, f7ready } from 'framework7-vue';
-
+  import tabbar from './Tabbar.vue'
   import routes from '../js/routes.js';
   import store from '../js/store';
 
   export default {
+    components:{ 
+      tabbar
+    },
     props: {
     f7route: Object,
     f7router: Object,

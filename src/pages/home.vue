@@ -94,6 +94,7 @@ import { useTimer } from "vue-timer-hook";
 export default {
   components: { product, productSheet, Timer, Digit },
   props: {
+    f7route: Object,
     f7router: Object,
   },
   data() {
@@ -175,6 +176,7 @@ export default {
     var time = new Date();
     time.setSeconds(time.getSeconds() + 600); // 10 minutes timer
     this.timer = useTimer(time);
+    console.log(this.f7route.path)
   },
 };
 </script>
